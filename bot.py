@@ -34,7 +34,7 @@ headers = {
 def get_response():
     response = requests.get(url, cookies=cookies, headers=headers)
     print(f'Response status code: {response.status_code}')
-    print(response.text[:500])
+    print(response.text)
     
     return response
 
