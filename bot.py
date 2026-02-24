@@ -114,7 +114,9 @@ def main():
             check_updates(ids)
         elif not os.path.exists(path):
             save_ids(ids)
+            send_telegram_message('New IDs file created! Check for new projects :)')
             check_updates(ids)
+        print('Job finished successfully!')
     except:
         print('Error on main!')
 
