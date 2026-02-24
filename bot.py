@@ -17,7 +17,7 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'pl,en-US;q=0.9,en;q=0.8',
-    # 'Accept-Encoding': 'gzip, deflate, br, zstd',
+    'Accept-Encoding': 'gzip, deflate, br, zstd',
     'Referer': 'https://accounts.google.com/',
     'Alt-Used': 'app.dataannotation.tech',
     'Connection': 'keep-alive',
@@ -34,7 +34,7 @@ headers = {
 def get_response():
     response = requests.get(url, cookies=cookies, headers=headers)
     print(f'Response status code: {response.status_code}')
-    print(response.text)
+    print(response.url)
     
     return response
 
