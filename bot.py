@@ -103,5 +103,4 @@ def main():
     except:
         print('Error on main!')
         
-if __name__ == "__main__":
-    main()
+main()
