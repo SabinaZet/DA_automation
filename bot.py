@@ -1,13 +1,14 @@
 import requests
 import os
+import sys
 import json
 from bs4 import BeautifulSoup
 
 c = os.environ['cookies']
 cookies = {}
-for item in c.split(";"):
+for item in c.split(';'):
     if "=" in item:
-        key, value = item.strip().split("=", 1)
+        key, value = item.strip().split('=', 1)
         cookies[key] = value
 url = 'https://app.dataannotation.tech/workers/projects'
 cookie = os.environ['COOKIE']
@@ -36,7 +37,9 @@ headers = {
 def get_response():
     response = requests.get(url, cookies=cookies, headers=headers)
     print(f'Response status code: {response.status_code}')
-    print(response.url)
+    if response.status_code != 200:
+        sys.exit('Błąd requestu!')
+        send_telegram_message(f'Błąd requestu! Status code: {response.status_code}')
     
     return response
 
@@ -44,6 +47,10 @@ def parse_html(response):
     soup = BeautifulSoup(response.text, 'html.parser')
     div = soup.find('div', {'id':'workers/WorkerProjectsTable-hybrid-root'})
     print(f'Data div found: {div is not None}')
+    if not div:
+        send_telegram_message('Nie znaleziono div – możliwe wylogowanie!')
+        sys.exit('No div found! Closing!')
+        
     data_props = div['data-props']
     data = json.loads(data_props)
     projects = data['dashboardMerchTargeting']['projects']
