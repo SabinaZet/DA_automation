@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 
 cookies = os.environ.get('cookies')
 url = 'https://app.dataannotation.tech/workers/projects'
-telegram = os.environ['TELEGRAM_TOKEN']
-chat = os.environ['CHAT_ID']
+telegram = os.environ.get('TELEGRAM_TOKEN')
+chat = os.environ.get('CHAT_ID')
 path = 'IDS.txt'
 headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
