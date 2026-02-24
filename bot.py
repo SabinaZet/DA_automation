@@ -38,8 +38,8 @@ def get_response():
     response = requests.get(url, cookies=cookies, headers=headers)
     print(f'Response status code: {response.status_code}')
     if response.status_code != 200:
-        sys.exit('Błąd requestu!')
         send_telegram_message(f'Błąd requestu! Status code: {response.status_code}')
+        sys.exit('Błąd requestu!')
     
     return response
 
@@ -67,8 +67,6 @@ def save_ids(ids):
   with open(path, 'w') as f:
     f.write(sids)
     print('IDs updated!')
-
-  f.close()
   
 def send_telegram_message(text):
     url = f"https://api.telegram.org/bot{telegram}/sendMessage"
@@ -98,12 +96,10 @@ def check_updates(ids):
       if len(new) < len(old):
         print('Less IDs than before.')
         save_ids(ids)
-
-      f.close()
     
-  except:
-    print(f'Wrong path: {path}')
-    send_telegram_message(f'Error with file {path}!')
+  except Exception as e:
+    print(f'Error while reading file {path}! Error: {e}')
+    send_telegram_message(f'Error while reading file {path}!')
 
 def main():
     response = get_response()
@@ -117,8 +113,8 @@ def main():
             send_telegram_message('New IDs file created! Check for new projects :)')
             check_updates(ids)
         print('Job finished successfully!')
-    except:
-        print('Error on main!')
+    except Exception as e:
+        print(f'Error on main! Error: {e}')
 
 if __name__ == '__main__':
     main()
