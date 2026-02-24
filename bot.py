@@ -40,7 +40,6 @@ def get_response():
 
 def parse_html(response):
     soup = BeautifulSoup(response.text, 'html.parser')
-    print(soup[:500])
     div = soup.find('div', {'id':'workers/WorkerProjectsTable-hybrid-root'})
     print(f'Data div found: {div is not None}')
     data_props = div['data-props']
