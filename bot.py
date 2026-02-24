@@ -3,7 +3,7 @@ import os
 import json
 from bs4 import BeautifulSoup
 
-cookies = os.environ['cookies']
+cookies = os.environ.get('cookies')
 url = 'https://app.dataannotation.tech/workers/projects'
 telegram = os.environ['TELEGRAM_TOKEN']
 chat = os.environ['CHAT_ID']
